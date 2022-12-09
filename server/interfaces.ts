@@ -3,7 +3,7 @@ export interface SocketData {
   room: string
 }
 
-export interface Message extends SocketData {
+export interface SendMessage extends SocketData {
   message: string
   createdTime: number
 }
@@ -12,7 +12,7 @@ export interface UserData extends SocketData {
   id: string
 }
 
-export interface GetMsgs extends Message {
+export interface GetMsgs extends SendMessage {
   _id: string
   createdAt: Date
   updatedAt: Date

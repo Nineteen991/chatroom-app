@@ -1,4 +1,5 @@
 import RoomAndUsers from "./room-and-users"
+import Messages from "./messages"
 
 export default function Chat({ socket, username, setUsername, room, setRoom }) {
   
@@ -6,7 +7,7 @@ export default function Chat({ socket, username, setUsername, room, setRoom }) {
     <div className="chat">
       <RoomAndUsers socket={ socket } room={ room } username={ username } />
       <div className="chat-messages">
-        chat
+        <Messages socket={ socket } />
       </div>
     </div>
   )

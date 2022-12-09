@@ -1,2 +1,30 @@
+.chat
+  max-width: 100rem
+  display: grid
+  gap: 2rem
+
+/* RoomAndUsers Component */
+.room-and-users
+  padding: 2rem 0
+  display: flex
+  flex-direction: column
+  align-items: center
+
 .room-title
   @include title
+  margin-bottom: 6rem
+
+.room-users
+  @include title
+  font-size: 3rem
+  margin-bottom: 1rem
+
+.room-users-list
+  @include title
+  font-size: 2rem
+  list-style-type: none
+
+.room-users-list li
+  margin-bottom: 1rem
+
+/* Messages */

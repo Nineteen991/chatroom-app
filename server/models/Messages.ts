@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
-import { Message } from '../interfaces'
+import { SendMessage } from '../interfaces'
 
-const MessageSchema = new mongoose.Schema<Message>({
+const MessageSchema = new mongoose.Schema<SendMessage>({
   username: {
     type: String,
     trim: true,

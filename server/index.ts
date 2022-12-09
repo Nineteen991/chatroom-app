@@ -5,7 +5,7 @@ import http from 'http'
 import { Server } from 'socket.io'
 
 import connectDB from './db/connect'
-import { SocketData, UserData } from './interfaces'
+import { SocketData, UserData, SendMessage } from './interfaces'
 import { getLast100Msgs } from './util/messageFunctions'
 
 // express setup
@@ -66,6 +66,14 @@ io.on('connection', socket => {
         socket.emit('last_100_messages', JSON.stringify(last100Messages))
       })
       .catch(error => console.log(error))
+  })
+
+  // send messages
+  socket.on('send_message', (data: SendMessage) => {
+    const { message, username, room, createdTime } = data
+
+    // Send to all users in the room, including the sender
+    io.in(room).emit('receive_message', data)
   })
 })
 
