@@ -11,3 +11,10 @@ export interface Message extends SocketData {
 export interface UserData extends SocketData {
   id: string
 }
+
+export interface GetMsgs extends Message {
+  _id: string
+  createdAt: Date
+  updatedAt: Date
+  __v: number
+}

@@ -26,7 +26,7 @@ export default function Home({ socket, username, setUsername, room, setRoom }) {
           <option>-- Select Room --</option>
           <option>Frontend</option>
           <option>Backend</option>
-          <option>CSS</option>
+          <option>Random</option>
         </select>
 
         <Link to='/chat'>

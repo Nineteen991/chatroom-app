@@ -6,6 +6,7 @@ import { Server } from 'socket.io'
 
 import connectDB from './db/connect'
 import { SocketData, UserData } from './interfaces'
+import { getLast100Msgs } from './util/messageFunctions'
 
 // express setup
 dotenv.config()
@@ -55,6 +56,16 @@ io.on('connection', socket => {
     allUsers.push({ id: socket.id, username, room })
 
     // list all the current users to the client
+    const currentUsers: UserData[] = allUsers.filter(user => user.room == room)
+    socket.to(room).emit('chatroom_users', currentUsers)
+    socket.emit('chatroom_users', currentUsers)
+
+    // get last 100 messages
+    getLast100Msgs(room)
+      .then(last100Messages => {
+        socket.emit('last_100_messages', JSON.stringify(last100Messages))
+      })
+      .catch(error => console.log(error))
   })
 })
 
