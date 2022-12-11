@@ -1,11 +1,14 @@
 .chat
-  max-width: 100rem
   display: grid
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr))
   gap: 2rem
 
-/* RoomAndUsers Component */
+  @media (min-width: 35rem)
+    grid-template-columns: 1fr 4fr
+
 .room-and-users
   padding: 2rem 0
+  width: 100%
   display: flex
   flex-direction: column
   align-items: center
@@ -27,4 +30,59 @@
 .room-users-list li
   margin-bottom: 1rem
 
-/* Messages */
+.messages
+  height: 85vh
+  overflow: auto
+  padding: 1rem 2rem
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.message
+  display: inline-block
+  background: #14C3A5
+  border-radius: 6px
+  margin-bottom: 2.4rem
+  width: 100%
+  padding: 1.2rem
+  font-size: 1.6rem
+
+  @media (min-width: 40rem)
+    width: 75%
+
+  @media (min-width: 70rem)
+    width: 50%
+
+.message-username
+  display: flex
+  justify-content: space-between
+
+.message-meta
+  color: rgb(153, 217, 234)
+  font-size: 1.6rem
+
+.message-text
+  color: #fff
+
+.send-message
+  padding: 1rem 4rem
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.message-input
+  padding: 1rem
+  margin-bottom: 1rem
+  width: 100%
+  border-radius: 6px
+  border: 1px solid rgb(153, 217, 234)
+  font-size: 1.6rem
+
+  @media (min-width: 35rem)
+    width: 45%
+
+.message-btn
+  width: 50%
+
+  @media (min-width: 35rem)
+    width: 25%

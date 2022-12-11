@@ -31,7 +31,7 @@ export default function Home({ socket, username, setUsername, room, setRoom }) {
 
         <Link to='/chat'>
           <button 
-            className="form-btn btn-secondary"
+            className="btn"
             onClick={ joinRoom }
           >
             Join Room

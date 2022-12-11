@@ -43,7 +43,7 @@ export default function RoomAndUsers ({ socket, room, username }) {
       </ul>
       
       <Link to='/'>
-        <button className='btn-secondary' onClick={ leaveRoom }>
+        <button className='btn' onClick={ leaveRoom }>
           Leave Room
         </button>
       </Link>

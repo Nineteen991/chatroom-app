@@ -6,7 +6,7 @@ import { Server } from 'socket.io'
 
 import connectDB from './db/connect'
 import { SocketData, UserData, SendMessage } from './interfaces'
-import { getLast100Msgs } from './util/messageFunctions'
+import { getLast100Msgs, saveMessage, leaveRoom } from './util/messageFunctions'
 
 // express setup
 dotenv.config()
@@ -38,14 +38,14 @@ io.on('connection', socket => {
     let createdTime: number = Date.now()
 
     // let others in the room know that someone has joined
-    socket.to(room).emit('receive_msg', {
+    socket.to(room).emit('receive_message', {
       message: `${ username } has joined the room`,
       username: CHAT_BOT,
       createdTime
     })
 
     // send msg to the new user
-    socket.emit('receive_msg', {
+    socket.emit('receive_message', {
       message: `Welcome ${ username }`,
       username: CHAT_BOT,
       createdTime
@@ -74,6 +74,41 @@ io.on('connection', socket => {
 
     // Send to all users in the room, including the sender
     io.in(room).emit('receive_message', data)
+
+    saveMessage(message, username, room, createdTime)
+  })
+
+  // remove user from room
+  socket.on('leave_room', (data: SocketData) => {
+    const { username, room } = data
+    socket.leave(room)
+
+    const createdTime: number = Date.now()
+
+    allUsers = leaveRoom(socket.id, allUsers)
+
+    socket.to(room).emit('chatroom_users', allUsers)
+    socket.to(room).emit('receive_message', {
+      username: CHAT_BOT,
+      message: `${ username } has left the chat`,
+      createdTime
+    })
+  })
+
+  socket.on('disconnect', () => {
+    const user = allUsers.find(user => user.id == socket.id)
+
+    const createdTime: number = Date.now()
+
+    if (user?.username) {
+      allUsers = leaveRoom(socket.id, allUsers)
+      socket.to(chatroom).emit('chatroom_users', allUsers)
+      socket.to(chatroom).emit('receive_message', {
+        username: CHAT_BOT,
+        message: `${ user.username } was disconnected from the chat`,
+        createdTime
+      })
+    }
   })
 })
 
