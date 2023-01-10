@@ -10,7 +10,7 @@ export default function Home({ socket, username, setUsername, room, setRoom }) {
   return (
     <div className='container'>
       <div className='form-container'>
-        <h1 className="form-title">Chat Rooms</h1>
+        <h1 className="form-title">{`<> Dev Chat </>`}</h1>
 
         <input 
           className="form-input" 

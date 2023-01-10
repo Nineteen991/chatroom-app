@@ -12,6 +12,12 @@ export default function App() {
   const [username, setUsername] = useState('')
   const [room, setRoom] = useState('')
 
+  localStorage.setItem('username', username)
+  localStorage.setItem('room', room)
+
+  const localUser = localStorage.getItem('username')
+  const localRoom = localStorage.getItem('room')
+
   return (
     <Router>
       <Routes>
@@ -19,9 +25,9 @@ export default function App() {
           {
             <Home 
               socket={ socket } 
-              username={ username }
+              username={ localUser }
               setUsername={ setUsername }
-              room={ room }
+              room={ localRoom }
               setRoom={ setRoom }
             />
           } 
@@ -30,9 +36,9 @@ export default function App() {
           { 
             <Chat 
               socket={ socket } 
-              username={ username }
+              username={ localUser }
               setUsername={ setUsername }
-              room={ room }
+              room={ localRoom }
               setRoom={ setRoom }
             />
           }

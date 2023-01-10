@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function RoomAndUsers ({ socket, room, username }) {
+export default function RoomAndUsers ({ socket, room, username, setUsername }) {
   const [usersInRoom, setUsersInRoom] = useState([])
 
   useEffect(() => {
@@ -15,11 +15,15 @@ export default function RoomAndUsers ({ socket, room, username }) {
   const leaveRoom = () => {
     const createdTime = Date.now()
     socket.emit('leave_room', { username, room, createdTime })
+    setUsername('')
+    localStorage.clear()
   }
 
   return (
     <div className="room-and-users">
-      <h1 className="room-title">{ room }</h1>
+      <h1 className="room-title">
+        { room ? `${room} Chat` : 'No room for you' }
+      </h1>
       
       { 
         usersInRoom.length > 0 
