@@ -19,4 +19,4 @@ backend. Where they are then saved to MongoDB.
 Previous messages are received by the backend from MongoDB and sent to the
 frontend via socket.io and displayed.
 
-![alt text](./client/src/images/chatroom.png)
+<!-- ![alt text](./client/src/images/chatroom.png) -->
