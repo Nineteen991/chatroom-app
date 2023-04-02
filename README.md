@@ -20,3 +20,5 @@ Previous messages are received by the backend from MongoDB and sent to the
 frontend via socket.io and displayed.
 
 ![alt text](./client/src/images/chatroom.png)
+
+I've Dockerized the front & back ends and added Docker Compose so anyone can run the containers on their local machine.
